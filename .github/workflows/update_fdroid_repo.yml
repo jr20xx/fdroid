@@ -1,0 +1,43 @@
+name: Update the FDroid repository on push
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+    contents: write
+
+jobs:
+    update_repo:
+        name: Automatically update the FDroid repository
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout the repository
+              uses: actions/checkout@v7
+
+            - name: Install FDroid server tools
+              run: |
+                sudo add-apt-repository ppa:fdroid/fdroidserver
+                sudo apt-get update
+                sudo apt-get install -y fdroidserver
+
+            - name: Decode the configuration file
+              run: |
+                echo "${{ secrets.REPOSITORY_CONFIGURATION }}" | base64 -d - > fdroid/config.yml
+                chmod 600 fdroid/config.yml
+
+            - name: Decode the keystore file
+              run: echo "${{ secrets.REPOSITORY_KEYSTORE }}" | base64 -d - > fdroid/keystore.p12
+
+            - name: Run the update command
+              run: fdroid update
+
+            - name: Push the changes of the automated update
+              run: |
+                git config --global user.name 'github-actions[bot]'
+                git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+                git add -A
+                git commit -m "Automated update of the FDroid repository"
+                git push
+            
