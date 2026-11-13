@@ -21,10 +21,7 @@ jobs:
                 sudo add-apt-repository ppa:fdroid/fdroidserver
                 sudo apt-get update
                 sudo apt-get install -y fdroidserver
-
-            - name: Change to the fdroid directory
-              run: cd fdroid/fdroid
-
+  
             - name: Decode the configuration file
               run: |
                 echo "${{ secrets.REPOSITORY_CONFIGURATION }}" | base64 -di > config.yml
@@ -35,9 +32,6 @@ jobs:
 
             - name: Run the update command
               run: fdroid update
-
-            - name: Change back to the initial directory
-              run: cd ..
 
             - name: Push the changes of the automated update
               run: |
