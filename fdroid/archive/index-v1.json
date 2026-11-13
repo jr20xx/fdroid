@@ -1,1 +1,0 @@
-{"repo": {"timestamp": 1794055893765, "version": 30000, "name": "My First F-Droid Archive Demo", "icon": "icon.png", "description": "Estas son aplicaciones del repositorio principal que se han archivado.", "address": "https://raw.githubusercontent.com/jr20xx/fdroid/main/fdroid/archive"}, "requests": {"install": [], "uninstall": []}, "apps": [], "packages": {}}
