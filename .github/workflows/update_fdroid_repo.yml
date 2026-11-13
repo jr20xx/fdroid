@@ -24,11 +24,11 @@ jobs:
 
             - name: Decode the configuration file
               run: |
-                echo "${{ secrets.REPOSITORY_CONFIGURATION }}" | base64 -d - > fdroid/config.yml
+                echo ${{ secrets.REPOSITORY_CONFIGURATION }} | base64 -di > fdroid/config.yml
                 chmod 600 fdroid/config.yml
 
             - name: Decode the keystore file
-              run: echo "${{ secrets.REPOSITORY_KEYSTORE }}" | base64 -d - > fdroid/keystore.p12
+              run: echo ${{ secrets.REPOSITORY_KEYSTORE }} | base64 -di > fdroid/keystore.p12
 
             - name: Change to the fdroid directory
               run: cd fdroid
