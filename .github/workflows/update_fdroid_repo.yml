@@ -28,7 +28,7 @@ jobs:
             - name: Decode the configuration file
               run: |
                 echo "${{ secrets.REPOSITORY_CONFIGURATION }}" | base64 -di > config.yml
-                chmod 600 fdroid/config.yml
+                chmod 600 config.yml
 
             - name: Decode the keystore file
               run: echo "${{ secrets.REPOSITORY_KEYSTORE }}" | base64 -di > keystore.p12
