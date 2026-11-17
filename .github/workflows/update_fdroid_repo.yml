@@ -1,15 +1,14 @@
-name: Update the FDroid repository on push
+name: Update the FDroid repository
 
 on:
-    push:
-        branches: [main]
+  workflow_dispatch:
 
 permissions:
     contents: write
 
 jobs:
     update_repo:
-        name: Automatically update the FDroid repository
+        name: Update the FDroid repository
         runs-on: ubuntu-latest
 
         steps:
